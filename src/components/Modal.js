@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import List, { ListItem, ListItemText } from '@material/react-list';
 import Select, { Option } from '@material/react-select';
+import { MDBInput } from "mdbreact";
 import {
     MDBModal,
     MDBModalBody,
@@ -34,18 +35,24 @@ const Modal = ({ modal, setModal }) => {
           </MDBModalHeader> */}
                 <MDBModalBody className=" mb-1">
                     <div className="md-form form-sm w-50">
-                        <input
+                        {/* <input
                             type="text"
                             id="form2"
                             className="form-control form-control"
                             autoComplete="off"
                             required
                         />
-                        <label htmlFor="form2">Produkt</label>
+                        <label htmlFor="form2">Produkt</label> */}
+                        <MDBInput label="Produkt"
+                            name="numberOfItems"
+                            autoComplete="off"
+                            type="text"
+                            id="form2"
+                            required />
                     </div>
 
                     <div className=" d-flex justify-content-between align-items-center">
-                        <span className="md-form">
+                        {/* <span className="md-form">
                             <input
                                 type="number"
                                 id="form3"
@@ -56,10 +63,16 @@ const Modal = ({ modal, setModal }) => {
                                 required
                             />
                             <label htmlFor="form3">Sztuki</label>
-                        </span>
+                        </span> */}
+                        <MDBInput label="Sztuki"
+                            name="numberOfItems"
+                            autoComplete="off"
+                            type="number"
+                            id="form3"
+                            required />
 
                         <span className="mx-4 pt-2">lub</span>
-
+                        {/* 
                         <span className="md-form">
                             <input
                                 type="number"
@@ -71,7 +84,13 @@ const Modal = ({ modal, setModal }) => {
                                 required
                             />
                             <label htmlFor="form31">Waga (dekagramy)</label>
-                        </span>
+                        </span> */}
+                        <MDBInput label="Waga (dekagramy)"
+                            name="numberOfItems"
+                            autoComplete="off"
+                            type="number"
+                            id="form31"
+                            required />
                     </div>
 
                     {/* <Select className="mdc-select mdc-select--filled demo-width-class"> */}
