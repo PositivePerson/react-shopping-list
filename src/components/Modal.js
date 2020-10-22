@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import List, { ListItem, ListItemText } from '@material/react-list';
+import Select, { Option } from '@material/react-select';
 import {
     MDBModal,
     MDBModalBody,
@@ -11,6 +12,7 @@ import {
 // import { pushItem } from "../handlerFunctions";
 
 const Modal = ({ modal, setModal }) => {
+    const [choosenOption, setChoosenOption] = useState("vegetables");
     const [selectedProduct, setSelectedProduct] = useState("vegetables");
 
     const productsList = ['vegetables', 'fruits', 'dairy', 'baked', 'drinks', 'hygiene', 'other'];
@@ -42,12 +44,12 @@ const Modal = ({ modal, setModal }) => {
                         <label htmlFor="form2">Produkt</label>
                     </div>
 
-                    <div className="md-form form-sm d-flex justify-content-between align-items-center">
-                        <span className="">
+                    <div className=" d-flex justify-content-between align-items-center">
+                        <span className="md-form">
                             <input
                                 type="number"
                                 id="form3"
-                                className="form-control form-control"
+                                className="form-control"
                                 autoComplete="off"
                                 defaultValue=""
                                 name="numberOfItems"
@@ -58,11 +60,11 @@ const Modal = ({ modal, setModal }) => {
 
                         <span className="mx-4 pt-2">lub</span>
 
-                        <span className="">
+                        <span className="md-form">
                             <input
                                 type="number"
                                 id="form31"
-                                className="form-control form-control"
+                                className="form-control"
                                 autoComplete="off"
                                 defaultValue=""
                                 name="weight"
@@ -72,8 +74,16 @@ const Modal = ({ modal, setModal }) => {
                         </span>
                     </div>
 
-                    <div className="mdc-select mdc-select--filled demo-width-class">
-                        <div className="mdc-select__anchor">
+                    {/* <Select className="mdc-select mdc-select--filled demo-width-class"> */}
+                    <Select
+                        label='Choose Dog'
+                        value={choosenOption}
+                        onChange={(evt) => setChoosenOption({ value: evt.target.value })}
+                    >
+                        <Option value='pomsky'></Option>
+                        <Option value='pomsky'>Pomsky</Option>
+                        <Option value='goldenDoodle'>Golden Doodle</Option>
+                        {/* <div className="mdc-select__anchor">
                             <span className="mdc-select__ripple"></span>
                             <span className="mdc-select__selected-text"></span>
                             <span className="mdc-select__dropdown-icon">
@@ -81,16 +91,17 @@ const Modal = ({ modal, setModal }) => {
                             </span>
                             <span className="mdc-floating-label">Kategoria</span>
                             <span className="mdc-line-ripple"></span>
-                        </div>
+                        </div> */}
 
-                        <div
+                        {/* <div
                             className="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth"
-                        >
-                            <List id="choosedCategory">
+                        > */}
+                        <List id="choosedCategory">
 
-                                {
-                                    productsList.map((product, index) => {
-                                        return (
+                            {
+                                productsList.map((product, index) => {
+                                    return (
+                                        <Option value={product}>
                                             <ListItem
                                                 className="text-center"
                                                 key={index}
@@ -102,13 +113,14 @@ const Modal = ({ modal, setModal }) => {
                                             >
                                                 <ListItemText primaryText={product.charAt(0).toUpperCase() + product.slice(1)} />
                                             </ListItem>
-                                        )
-                                    })
-                                }
+                                        </Option>
+                                    )
+                                })
+                            }
 
-                            </List>
-                        </div>
-                    </div>
+                        </List>
+                        {/* </div> */}
+                    </Select>
 
                     <div className="text-center mt-4">
                         <button className="btn btn-info" id="dodaj">

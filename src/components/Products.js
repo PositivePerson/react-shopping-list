@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import List, { ListItem, ListItemText, ListItemMeta } from '@material/react-list';
 
 class Products extends Component {
@@ -35,9 +35,9 @@ class Products extends Component {
         }
 
         return (
-            <div>
+            <Fragment>
                 {items}
-            </div>
+            </Fragment>
         )
     }
 }
