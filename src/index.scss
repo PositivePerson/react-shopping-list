@@ -1,0 +1,189 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	  sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+	  monospace;
+  }
+  
+
+h5 {
+	font-size: .80em;
+}
+
+ul {
+	transition: opacity .25s;
+}
+
+li {
+	transition: opacity .25s;
+}
+
+p {
+	margin-bottom: 0 !important;
+}
+
+#titleBox {
+	text-align: center;
+	letter-spacing: .55em;
+}
+
+#title {
+	width: 100%;
+	font-weight: 600;
+}
+
+.hints {
+	position: absolute;
+	bottom: 3em;
+	right: 5em;
+}
+
+.hint {
+	font-size: .8em;
+	transition: opacity .25s;
+
+	cursor: pointer;
+}
+
+.summed {
+	border-top: 1px solid rgba(0, 0, 0, 0.37);
+	height: 2em;
+}
+
+.summed > span {
+	font-size: .9em;
+}
+
+.md-form label {
+	left: auto;
+}
+
+.modal-body {
+	padding: 1em 4em;
+}
+
+.mdc-select .mdc-floating-label {
+	left: 0 !important;
+}
+
+.mdc-select .mdc-select__anchor {
+	padding-left: 0 !important;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+	color: #4285f4 !important;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-line-ripple::after {
+	border-bottom-color: #4285f4 !important;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-select__dropdown-icon {
+	fill: #4285f4 !important;
+}
+
+.mdc-select:not(.mdc-select--disabled) .mdc-select__anchor {
+	background: transparent !important;
+}
+
+.mdc-select:not(.mdc-select--disabled):hover .mdc-line-ripple::before {
+	border-bottom-color: #757575 !important;
+}
+
+.mdc-select:not(.mdc-select--disabled) .mdc-line-ripple::before {
+	border-bottom-color: #757575 !important;
+}
+
+// .mdc-select:not(.mdc-select--disabled) .mdc-select__selected-text {
+//   color: #757575 !important;
+// }
+
+.modal-body input {
+	color: rgba(0, 0, 0, 0.87) !important;
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+	.mdc-list:not(#choosedCategory),
+	.summed {
+		width: 95%;
+	}
+	.hints {
+		position: absolute;
+		bottom: .5em;
+		right: .5em;
+
+		width: 5em;
+	}
+
+	.hints .hint {
+		text-align: center;
+	}
+	.hints p {
+		text-align: center;
+	}
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+	.mdc-list:not(#choosedCategory),
+	.summed {
+		width: 85%;
+	}
+	.hints {
+		position: absolute;
+		bottom: .5em;
+		right: .5em;
+
+		width: 8em;
+	}
+	.hints .hint {
+		text-align: center;
+	}
+	.hints p {
+		text-align: center;
+	}
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.mdc-list:not(#choosedCategory),
+	.summed {
+		width: 70%;
+	}
+	.hints {
+		position: absolute;
+		bottom: 1em;
+		right: 1em;
+	}
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+	.mdc-list:not(#choosedCategory),
+	.summed {
+		width: 50%;
+	}
+	.hints {
+		position: absolute;
+		bottom: 2em;
+		right: 3em;
+	}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+	.mdc-list:not(#choosedCategory),
+	.summed {
+		width: 35%;
+	}
+}
