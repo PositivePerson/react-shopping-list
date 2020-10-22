@@ -78,7 +78,7 @@ const Modal = ({ modal, setModal }) => {
                     <Select
                         label='Choose Dog'
                         value={choosenOption}
-                        onChange={(evt) => setChoosenOption({ value: evt.target.value })}
+                        onChange={(evt) => setChoosenOption(evt.target.value)}
                     >
                         <Option value='pomsky'></Option>
                         <Option value='pomsky'>Pomsky</Option>
@@ -96,8 +96,25 @@ const Modal = ({ modal, setModal }) => {
                         {/* <div
                             className="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth"
                         > */}
-                        <List id="choosedCategory">
 
+                        {
+                            productsList.map((product, index) => {
+                                return (
+                                    <Option value={product}
+                                        className="text-center"
+                                        key={index}
+                                        checked={choosenOption === product}
+
+                                        onEnhancedChange={() => setChoosenOption(product)}
+                                    >
+                                        {product.charAt(0).toUpperCase() + product.slice(1)}
+                                    </Option>
+                                )
+                            })
+                        }
+
+
+                        {/* <List id="choosedCategory">
                             {
                                 productsList.map((product, index) => {
                                     return (
@@ -117,8 +134,9 @@ const Modal = ({ modal, setModal }) => {
                                     )
                                 })
                             }
+                        </List> */}
 
-                        </List>
+
                         {/* </div> */}
                     </Select>
 
