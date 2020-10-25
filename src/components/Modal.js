@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import List, { ListItem, ListItemText } from '@material/react-list';
 import Select, { Option } from '@material/react-select';
-import { MDBInput } from "mdbreact";
 import {
+    MDBInput,
+    MDBBtn,
     MDBModal,
     MDBModalBody,
     MDBContainer,
@@ -159,6 +160,15 @@ const Modal = ({ modal, setModal }) => {
                         {/* </div> */}
                     </Select>
 
+                    <button
+                        type="button"
+                        className="btn btn-primary mt-1 mt-md-3"
+                        data-toggle="modal"
+                        data-target="#basicExampleModal"
+                        onClick={() => setModal(!modal)}
+                    >
+                        Dodaj produkt
+        </button>
                     <div className="text-center mt-4">
                         <button className="btn btn-info" id="dodaj">
                             DODAJ
@@ -170,6 +180,7 @@ const Modal = ({ modal, setModal }) => {
 
 
                 </MDBModalBody>
+
             </MDBModal>
         </React.Fragment>
     )
