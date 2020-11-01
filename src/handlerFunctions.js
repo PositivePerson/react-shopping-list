@@ -79,7 +79,7 @@ export function edit(li) {
 
   $('#form2').val(liProductName);
   $('#form2')[0].nextElementSibling.className = 'active';
-  if (liUnit === 'szt') {
+  if (liUnit === 'pcs') {
     $('#form3').val(liNumber);
     $('#form3')[0].nextElementSibling.className = 'active';
   } else if (liUnit === 'dag') {
@@ -103,7 +103,7 @@ export function pushItem() {
     (numberOfItems !== '' && weight === '' && newItem !== '')
   ) {
     // Grabbing amount from input
-    const amount = $('#form3').val() === '' ? `${weight} dag` : `${numberOfItems} szt`;
+    const amount = $('#form3').val() === '' ? `${weight} dag` : `${numberOfItems} pcs`;
     const category = select.value;
 
     // Create a new li and add to matched ul
@@ -118,7 +118,7 @@ export function pushItem() {
     // Event to remove li or ul for new item
     $(`ul#${category} li:last-child`).on('dblclick', (event) => {
       const numberOfItems =
-        event.currentTarget.lastElementChild.innerText.split(' ')[1] === 'szt'
+        event.currentTarget.lastElementChild.innerText.split(' ')[1] === 'pcs'
           ? event.currentTarget.lastElementChild.innerText.split(' ')[0]
           : 0;
       const weight =
@@ -179,7 +179,7 @@ export function pushItem() {
 
 export function removeOnDblclick(event) {
   const numberOfItems =
-    event.currentTarget.lastElementChild.innerText.split(' ')[1] === 'szt'
+    event.currentTarget.lastElementChild.innerText.split(' ')[1] === 'pcs'
       ? event.currentTarget.lastElementChild.innerText.split(' ')[0]
       : 0;
   const weight =
@@ -219,7 +219,7 @@ export function setCurrentlyEdited(element) {
 
 export function removeCurrentlyEdited() {
   const numberOfItems =
-    currenlyBeingEdited[0].lastElementChild.innerText.split(' ')[1] === 'szt'
+    currenlyBeingEdited[0].lastElementChild.innerText.split(' ')[1] === 'pcs'
       ? currenlyBeingEdited[0].lastElementChild.innerText.split(' ')[0]
       : 0;
   const weight =

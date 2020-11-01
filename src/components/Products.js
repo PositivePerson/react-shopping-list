@@ -28,7 +28,7 @@ class Products extends Component {
                 >
                     <ListItem>
                         <ListItemText primaryText="Smoothie " />
-                        <ListItemMeta meta="2 szt" />
+                        <ListItemMeta meta="2 pcs" />
                     </ListItem>
                 </List>
             )

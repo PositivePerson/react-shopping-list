@@ -26,10 +26,10 @@ function App() {
         <Products />
 
         <div className="summed">
-          <span>Produkty: <span id="produkty">4</span></span>
+          <span>Products: <span id="produkty">4</span></span>
           <span className="float-right"><span id="waga">500</span> dag</span>
           <span className="float-right ml-2 mr-3">|</span>
-          <span className="float-right"><span id="sztuki">5</span> szt</span>
+          <span className="float-right"><span id="sztuki">5</span> pcs</span>
         </div>
 
         <button
@@ -39,7 +39,7 @@ function App() {
           data-target="#basicExampleModal"
           onClick={() => setModal(!modal)}
         >
-          Dodaj produkt
+          Add Product
         </button>
 
         <Modal modal={modal} setModal={setModal} />
