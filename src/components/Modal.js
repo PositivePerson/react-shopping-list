@@ -11,15 +11,19 @@ import {
     MDBModalFooter
 } from "mdbreact";
 
-import $ from "jquery";
+import { incList } from "./Products";
 
+import $ from "jquery";
 
 // import { pushItem } from "../handlerFunctions";
 
-const Modal = ({ modal, setModal }) => {
+const Modal = ({ modal, setModal, globalPiecesCounter, globalWeightCounter, globalPieces, globalWeight, countItems }) => {
     const [choosenOption, setChoosenOption] = useState("vegetables");
-    const [selectedProduct, setSelectedProduct] = useState("vegetables");
+    // const [selectedProduct, setSelectedProduct] = useState("vegetables");
 
+    const productNameRef = useRef();
+
+    const [productName, setProductName] = useState('');
     const [pieces, setPieces] = useState('');
     const [weight, setWeight] = useState('');
 
@@ -31,6 +35,22 @@ const Modal = ({ modal, setModal }) => {
     // useEffect(() => {
     //     manageInputsEnable();
     // }, Pieces.current)
+
+    const addItem = e => {
+        console.log(pieces);
+        console.log("productNameRef.current.state.innerValue: ", productNameRef.current.state.innerValue);
+        setProductName(productNameRef.current.state.innerValue);
+        console.log(productName);
+        // setTimeout(() => {
+        incList({
+            name: productNameRef.current.state.innerValue,
+            category: choosenOption,
+            pieces,
+            weight
+        });
+        setModal(!modal);
+        // }, 300);
+    }
 
     const manageInputsEnable = (e) => {
         let value = e.target.value;
@@ -70,11 +90,14 @@ const Modal = ({ modal, setModal }) => {
                             required
                         />
                         <label htmlFor="form2">Produkt</label> */}
+
                         <MDBInput label="Produkt"
-                            name="numberOfItems"
+                            name="productName"
                             autoComplete="off"
                             type="text"
                             id="form2"
+                            ref={productNameRef}
+                            // onChange={setP}
                             required />
                     </div>
 
@@ -86,32 +109,32 @@ const Modal = ({ modal, setModal }) => {
                                 className="form-control"
                                 autoComplete="off"
                                 defaultValue=""
-                                name="numberOfItems"
+                                name="pieces"
                                 required
                             />
                             <label htmlFor="form3">Sztuki</label>
                         </span> */}
                         <MDBInput label="Sztuki"
-                            name="numberOfItems"
+                            name="pieces"
                             autoComplete="off"
                             type="number"
                             id="form3"
                             value={pieces}
                             onChange={manageInputsEnable}
                             disabled={piecesDisabled}
-                            onkeypress="return event.charCode >= 48" min="0"
+                            onKeyPress={(event) => event.charCode >= 48} min="0"
                             required />
 
                         <span className="mx-4 pt-2">lub</span>
                         <MDBInput label="Waga (dekagramy)"
-                            name="numberOfItems"
+                            name="pieces"
                             autoComplete="off"
                             type="number"
                             id="form31"
                             value={weight}
                             onChange={manageInputsEnable}
                             disabled={weightDisabled}
-                            onkeypress="return event.charCode >= 48" min="0"
+                            onKeyPress={(event) => event.charCode >= 48} min="0"
                             required />
                     </div>
 
@@ -165,8 +188,7 @@ const Modal = ({ modal, setModal }) => {
                             data-toggle="modal"
                             data-target="#basicExampleModal"
                             onClick={() => {
-                                setModal(!modal);
-                                console.log(pieces);
+                                addItem();
                             }}
                             id="dodaj">
                             Approve

@@ -7,7 +7,6 @@ import { MDCSelect } from '@material/select';
 console.log(document.querySelector('.mdc-list'));
 // const list = new MDCList(document.querySelector('.mdc-list'));
 var listEle = document.getElementById('my-list');
-var list = new mdc.list.MDCList(listEle);
 list.singleSelection = true;
 
 const select = new MDCSelect(document.querySelector('.mdc-select'));
@@ -16,8 +15,8 @@ select.listen('MDCSelect:change', () => {
   alert(`Selected option at index ${select.selectedIndex} with value "${select.value}"`);
 });
 
-let globalNumberOfItems = 5;
-let globalWeight = 500;
+// let globalNumberOfItems = 5;
+// let globalWeight = 500;
 
 let currenlyBeingEdited = '';
 
@@ -94,20 +93,17 @@ export function edit(li) {
 }
 
 export function pushItem() {
-  const numberOfItems = $('#form3').val();
-  const weight = $('#form31').val();
   const newItem = $('#form2').val();
 
   if (
-    (numberOfItems === '' && weight !== '' && newItem !== '') ||
-    (numberOfItems !== '' && weight === '' && newItem !== '')
+    (pieces === '' && weight !== '' && newItem !== '') ||
+    (pieces !== '' && weight === '' && newItem !== '')
   ) {
     // Grabbing amount from input
-    const amount = $('#form3').val() === '' ? `${weight} dag` : `${numberOfItems} pcs`;
-    const category = select.value;
+    const amount = pieces === '' ? `${weight} dag` : `${pieces} pcs`;
 
     // Create a new li and add to matched ul
-    $(`ul#${category}`).append(
+    $(`ul#${choosenOption}`).append(
       `<li class="mdc-list-item">
       <span class="mdc-list-item__ripple"></span>
       <span class="mdc-list-item__text">${newItem}</span>
@@ -116,8 +112,8 @@ export function pushItem() {
     );
 
     // Event to remove li or ul for new item
-    $(`ul#${category} li:last-child`).on('dblclick', (event) => {
-      const numberOfItems =
+    $(`ul#${choosenOption} li:last-child`).on('dblclick', (event) => {
+      const pieces =
         event.currentTarget.lastElementChild.innerText.split(' ')[1] === 'pcs'
           ? event.currentTarget.lastElementChild.innerText.split(' ')[0]
           : 0;
@@ -146,19 +142,19 @@ export function pushItem() {
 
       setTimeout(() => {
         // Counter update
-        globalNumberOfItemsCounter('minus', numberOfItems);
-        globalWeightCounter('minus', weight);
+        globalPiecesCounter(globalPieces - globalPieces);
+        globalWeightCounter(weight - globalWeight);
         countItems();
       }, 300);
     });
 
     // Event to allow edit that new element
-    allowEdit($(`ul#${category} li:last-child`));
+    allowEdit($(`ul#${choosenOption} li:last-child`));
 
     // Show hidden category
-    if ($(`ul#${category}`)[0].style.display === 'none') {
-      $(`ul#${category}`)[0].style.opacity = '1';
-      $(`ul#${category}`)[0].style.display = 'block';
+    if ($(`ul#${choosenOption}`)[0].style.display === 'none') {
+      $(`ul#${choosenOption}`)[0].style.opacity = '1';
+      $(`ul#${choosenOption}`)[0].style.display = 'block';
     }
 
     // data-dismiss="modal"
@@ -168,8 +164,8 @@ export function pushItem() {
     $('.modal-backdrop').remove();
 
     // Counter update
-    globalNumberOfItemsCounter('plus', numberOfItems);
-    globalWeightCounter('plus', weight);
+    globalPiecesCounter(globalPieces + globalPieces);
+    globalWeightCounter(weight + globalWeight);
     countItems();
   } else {
     // eslint-disable-next-line no-alert
