@@ -1,96 +1,47 @@
-import React, { Component, Fragment } from 'react';
-import List, { ListItem, ListItemText, ListItemMeta } from '@material/react-list';
 
-const items = [];
-const products = [
+import React from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+const items = [
     {
         name: "Carrots",
         category: "vegetables",
         pieces: "",
-        weight: "12"
+        weight: "12",
+        id: 1
     },
     {
         name: "Mirinda",
         category: "Drink",
         pieces: "1",
-        weight: ""
+        weight: "",
+        id: 2
     }
-]
-const displayedProducts = [];
+];
 
 export function incList(product) {
-    // console.log(product.category)
-    items.push(
-        <List
-            singleSelection
-        // selectedIndex={this.state.selectedIndex}
-        // handleSelect={(selectedIndex) => this.setState({ selectedIndex })} key={i}
-        >
-            <ListItem>
-                <ListItemText primaryText={product.name} />
-                <ListItemMeta meta={product.weight ? product.weight + " deg" : product.pieces + " pcs"} />
-            </ListItem>
-        </List>
-    )
+    items.push(product);
 }
 
-class Products extends Component {
-    state = {
-        selectedIndex: 1,
-    };
+const Products = () => {
+    return (
+        <List component="nav" style={root} aria-label="products">
+            {items.map((item) => (
+                <ListItem button key={item.id}>
+                    <ListItemText primary={item.name} />
+                    <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " deg" : item.pieces + " pcs"} />
+                </ListItem>
 
+            ))}
+        </List>
+    );
+}
 
-    render() {
-        console.log("displayedProducts: ", displayedProducts);
-
-        // Reduces recaps
-        products.filter(product => {
-            displayedProducts.map(displayed => displayed !== product);
-        })
-
-        console.log("products: ", products);
-        console.log("displayedProducts: ", displayedProducts);
-
-        // Add new items to main array of items
-        // products.map(product => {
-        //     displayedProducts.push(product);
-        // })
-
-        console.log("displayedProducts: ", displayedProducts);
-
-        displayedProducts.forEach((product, i) => {
-            // for (let i = 0; i < 5; i++) {
-            items.push(
-                // <ul className="mdc-list " id="drinks" key={i}>
-                //     <h5>Napoje</h5>
-                //     <li className="mdc-list-item">
-                //         <span className="mdc-list-item__ripple"></span>
-                //         <span className="mdc-list-item__text">Smoothie</span>
-                //         <span aria-hidden="true" className="mdc-list-item__meta">2 szt</span>
-                //     </li>
-                // </ul>
-
-                <List
-                    singleSelection
-                    selectedIndex={this.state.selectedIndex}
-                    handleSelect={(selectedIndex) => this.setState({ selectedIndex })}
-                    key={i}
-                >
-                    <ListItem>
-                        <ListItemText primaryText={product.name} />
-                        <ListItemMeta meta={product.weight ? product.weight + " deg" : product.pieces + " pcs"} />
-                    </ListItem>
-                </List>
-            )
-
-        })
-
-        return (
-            <Fragment>
-                {items}
-            </Fragment>
-        )
-    }
+const root = {
+    width: '70%',
+    maxWidth: "360",
+    backgroundColor: "whitesmoke",
 }
 
 export default Products;

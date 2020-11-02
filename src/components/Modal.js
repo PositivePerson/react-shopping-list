@@ -17,7 +17,17 @@ import $ from "jquery";
 
 // import { pushItem } from "../handlerFunctions";
 
-const Modal = ({ modal, setModal, globalPiecesCounter, globalWeightCounter, globalPieces, globalWeight, countItems }) => {
+const Modal = ({
+    modal,
+    setModal,
+    globalPiecesCounter,
+    globalWeightCounter,
+    globalPieces,
+    globalWeight,
+    countItems,
+    globalNumOfItems,
+    globalNumOfItemsCounter
+}) => {
     const [choosenOption, setChoosenOption] = useState("vegetables");
     // const [selectedProduct, setSelectedProduct] = useState("vegetables");
 
@@ -46,8 +56,10 @@ const Modal = ({ modal, setModal, globalPiecesCounter, globalWeightCounter, glob
             name: productNameRef.current.state.innerValue,
             category: choosenOption,
             pieces,
-            weight
+            weight,
+            id: globalNumOfItems + 1,
         });
+        globalNumOfItemsCounter(globalNumOfItemsCounter + 1);
         setModal(!modal);
         // }, 300);
     }

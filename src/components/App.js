@@ -48,7 +48,8 @@ function App() {
         </div>
 
 
-        <Products />
+        <Products
+        />
 
         <div className="summed">
           <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
@@ -75,6 +76,8 @@ function App() {
           globalPiecesCounter={globalPiecesCounter}
           globalPieces={globalPieces}
           countItems={countItems}
+          globalNumOfItems={globalNumOfItems}
+          globalNumOfItemsCounter={globalNumOfItemsCounter}
         // incList={incList}
         // globalNumOfItemsCounter={globalNumOfItemsCounter}
         // globalNumOfItems={globalNumOfItems}

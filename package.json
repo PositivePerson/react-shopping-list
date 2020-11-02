@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "@material/list": "^7.0.0",
     "@material/react-list": "^0.15.0",
     "@material/react-menu": "^0.15.0",
