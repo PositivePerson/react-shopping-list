@@ -40,10 +40,10 @@ const ProductState = (props) => {
         })
     }
 
-    const removeProduct = (item) => {
+    const removeProduct = (id) => {
         dispatch({
             type: REMOVE_PRODUCT,
-            payload: item
+            payload: id
         })
     }
 
