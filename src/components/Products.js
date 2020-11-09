@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
+import ProductContext from '../context/productContext'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-const items = [
+const localIitems = [
     {
         name: "Carrots",
         category: "vegetables",
@@ -21,14 +22,18 @@ const items = [
 ];
 
 export function incList(product) {
-    items.push(product);
+    localIitems.push(product);
 }
 
 const Products = () => {
+    const productContext = useContext(ProductContext);
+
     return (
         <List component="nav" style={root} aria-label="products">
-            {items.map((item) => (
-                <ListItem button key={item.id}>
+            {/* {localIitems.map((item) => ( */}
+            {        console.log(productContext.items)
+            }            {productContext.items.map((item) => (
+                <ListItem style={itemStyle} button key={item.id}>
                     <ListItemText primary={item.name} />
                     <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " deg" : item.pieces + " pcs"} />
                 </ListItem>
@@ -41,6 +46,9 @@ const Products = () => {
 const root = {
     width: '70%',
     maxWidth: "360",
+}
+
+const itemStyle = {
     backgroundColor: "whitesmoke",
 }
 

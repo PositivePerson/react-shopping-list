@@ -11,6 +11,8 @@ import $ from "jquery";
 import Products from './Products';
 import Modal from './Modal';
 
+import ProductState from '../context/ProductState';
+
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -41,56 +43,55 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div className="container-fluid d-flex flex-column justify-content-between align-items-center py-2 py-md-5" style={{ minHeight: "100vh" }}>
-        <div id="titleBox">
-          <p id="title">LISTA ZAKUPÓW</p>
-        </div>
+    <ProductState>
+      <div className="App">
+        <div className="container-fluid d-flex flex-column justify-content-between align-items-center py-2 py-md-5" style={{ minHeight: "100vh" }}>
+          <div id="titleBox">
+            <p id="title">LISTA ZAKUPÓW</p>
+          </div>
 
 
-        <Products
-        />
+          <Products
+          />
 
-        <div className="summed">
-          <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
-          <span className="float-right"><span id="waga">500</span> dag</span>
-          <span className="float-right ml-2 mr-3">|</span>
-          <span className="float-right"><span id="sztuki">5</span> pcs</span>
-        </div>
+          <div className="summed">
+            <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
+            <span className="float-right"><span id="waga">{globalWeight}</span> dag</span>
+            <span className="float-right ml-2 mr-3">|</span>
+            <span className="float-right"><span id="sztuki">{globalPieces}</span> pcs</span>
+          </div>
 
-        <button
-          type="button"
-          className="btn btn-primary mt-1 mt-md-3"
-          data-toggle="modal"
-          data-target="#basicExampleModal"
-          onClick={() => setModal(!modal)}
-        >
-          Add Product
+          <button
+            type="button"
+            className="btn btn-primary mt-1 mt-md-3"
+            data-toggle="modal"
+            data-target="#basicExampleModal"
+            onClick={() => setModal(!modal)}
+          >
+            Add Product
         </button>
 
-        <Modal
-          modal={modal}
-          setModal={setModal}
-          globalWeightCounter={globalWeightCounter}
-          globalWeight={globalWeight}
-          globalPiecesCounter={globalPiecesCounter}
-          globalPieces={globalPieces}
-          countItems={countItems}
-          globalNumOfItems={globalNumOfItems}
-          globalNumOfItemsCounter={globalNumOfItemsCounter}
-        // incList={incList}
-        // globalNumOfItemsCounter={globalNumOfItemsCounter}
-        // globalNumOfItems={globalNumOfItems}
-        />
+          <Modal
+            modal={modal}
+            setModal={setModal}
+            globalWeightCounter={globalWeightCounter}
+            globalWeight={globalWeight}
+            globalPiecesCounter={globalPiecesCounter}
+            globalPieces={globalPieces}
+            countItems={countItems}
+            globalNumOfItems={globalNumOfItems}
+            globalNumOfItemsCounter={globalNumOfItemsCounter}
+          />
 
 
 
-        <span className="material-icons d-md-none">
-          touch_app
+          <span className="material-icons d-md-none">
+            touch_app
             </span>
 
-      </div>
-    </div >
+        </div>
+      </div >
+    </ProductState>
   );
 }
 

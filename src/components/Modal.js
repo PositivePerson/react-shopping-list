@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import ProductContext from '../context/productContext'
 import List, { ListItem, ListItemText } from '@material/react-list';
 import Select, { Option } from '@material/react-select';
 import {
@@ -15,8 +16,6 @@ import { incList } from "./Products";
 
 import $ from "jquery";
 
-// import { pushItem } from "../handlerFunctions";
-
 const Modal = ({
     modal,
     setModal,
@@ -28,8 +27,9 @@ const Modal = ({
     globalNumOfItems,
     globalNumOfItemsCounter
 }) => {
+    const productContext = useContext(ProductContext);
+
     const [choosenOption, setChoosenOption] = useState("vegetables");
-    // const [selectedProduct, setSelectedProduct] = useState("vegetables");
 
     const productNameRef = useRef();
 
@@ -42,36 +42,35 @@ const Modal = ({
 
     const productsList = ['vegetables', 'fruits', 'dairy', 'baked', 'drinks', 'hygiene', 'other'];
 
-    // useEffect(() => {
-    //     manageInputsEnable();
-    // }, Pieces.current)
-
     const addItem = e => {
-        console.log(pieces);
-        console.log("productNameRef.current.state.innerValue: ", productNameRef.current.state.innerValue);
         setProductName(productNameRef.current.state.innerValue);
-        console.log(productName);
-        // setTimeout(() => {
-        incList({
+        // incList({
+        //     name: productNameRef.current.state.innerValue,
+        //     category: choosenOption,
+        //     pieces,
+        //     weight,
+        //     id: globalNumOfItems + 1,
+        // });
+        productContext.addProduct({
             name: productNameRef.current.state.innerValue,
             category: choosenOption,
             pieces,
             weight,
             id: globalNumOfItems + 1,
         });
-        globalNumOfItemsCounter(globalNumOfItemsCounter + 1);
+        pieces ? globalPiecesCounter(globalPieces + parseInt(pieces)) : globalWeightCounter(globalWeight + parseInt(weight));
+        globalNumOfItemsCounter(globalNumOfItems + 1);
         setModal(!modal);
-        // }, 300);
     }
 
     const manageInputsEnable = (e) => {
         let value = e.target.value;
         if (value === "0") value = "";
-        if (e.target.id === "form3") {
+        if (e.target.id === "piecesForm") {
             setPieces(value);
             value.length ? setWeightDisabled(true) : setWeightDisabled(false);
         }
-        if (e.target.id === "form31") {
+        if (e.target.id === "weightForm") {
             setWeight(value);
             value.length ? setPiecesDisabled(true) : setPiecesDisabled(false);
         }
@@ -79,29 +78,10 @@ const Modal = ({
 
     return (
         <React.Fragment>
-            {/* <MDBContainer>
-                Hi the its container
-        </MDBContainer> */}
 
-            {/* Modal code below: */}
             <MDBModal isOpen={modal} toggle={() => setModal(!modal)}>
-                {/* <MDBModalHeader
-                    className="text-center"
-                    titleClass="w-100 font-weight-bold"
-                    toggle={() => setModal(!modal)}
-                >
-                    Add new event
-          </MDBModalHeader> */}
                 <MDBModalBody className=" mb-1">
                     <div className="md-form form-sm w-50">
-                        {/* <input
-                            type="text"
-                            id="form2"
-                            className="form-control form-control"
-                            autoComplete="off"
-                            required
-                        />
-                        <label htmlFor="form2">Produkt</label> */}
 
                         <MDBInput label="Produkt"
                             name="productName"
@@ -109,28 +89,16 @@ const Modal = ({
                             type="text"
                             id="form2"
                             ref={productNameRef}
-                            // onChange={setP}
                             required />
                     </div>
 
                     <div className=" d-flex justify-content-between align-items-center">
-                        {/* <span className="md-form">
-                            <input
-                                type="number"
-                                id="form3"
-                                className="form-control"
-                                autoComplete="off"
-                                defaultValue=""
-                                name="pieces"
-                                required
-                            />
-                            <label htmlFor="form3">Sztuki</label>
-                        </span> */}
-                        <MDBInput label="Sztuki"
+
+                        <MDBInput label="Pieces"
                             name="pieces"
                             autoComplete="off"
                             type="number"
-                            id="form3"
+                            id="piecesForm"
                             value={pieces}
                             onChange={manageInputsEnable}
                             disabled={piecesDisabled}
@@ -138,11 +106,11 @@ const Modal = ({
                             required />
 
                         <span className="mx-4 pt-2">lub</span>
-                        <MDBInput label="Waga (dekagramy)"
+                        <MDBInput label="Weight (decagrams)"
                             name="pieces"
                             autoComplete="off"
                             type="number"
-                            id="form31"
+                            id="weightForm"
                             value={weight}
                             onChange={manageInputsEnable}
                             disabled={weightDisabled}
@@ -150,29 +118,11 @@ const Modal = ({
                             required />
                     </div>
 
-                    {/* <Select className="mdc-select mdc-select--filled demo-width-class"> */}
                     <Select
-                        label='Choose Category'
+                        label="Category"
                         value={choosenOption}
                         onChange={(evt) => setChoosenOption(evt.target.value)}
                     >
-                        {/* <Option value='pomsky'></Option>
-                        <Option value='pomsky'>Pomsky</Option>
-                        <Option value='goldenDoodle'>Golden Doodle</Option> */}
-                        {/* <div className="mdc-select__anchor">
-                            <span className="mdc-select__ripple"></span>
-                            <span className="mdc-select__selected-text"></span>
-                            <span className="mdc-select__dropdown-icon">
-
-                            </span>
-                            <span className="mdc-floating-label">Kategoria</span>
-                            <span className="mdc-line-ripple"></span>
-                        </div> */}
-
-                        {/* <div
-                            className="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth"
-                        > */}
-
                         {
                             productsList.map((product, index) => {
                                 return (
@@ -188,10 +138,7 @@ const Modal = ({
                                 )
                             })
                         }
-
-
                     </Select>
-
 
                     <div className="text-center mt-4">
                         <button
@@ -205,9 +152,7 @@ const Modal = ({
                             id="dodaj">
                             Approve
                         </button>
-                        {/* <button className="btn btn-info" >
-                            DODAJ
-                                        </button> */}
+
                         <button
                             type="button"
                             className="btn btn-info mt-1 mt-md-3"
@@ -217,14 +162,8 @@ const Modal = ({
                             style={{ display: "none" }} id="aktualizuj">
                             Approve Edition
                         </button>
-                        {/* <button className="btn btn-info">
-                            EDYTUJ
-                                        </button> */}
                     </div>
-
-
                 </MDBModalBody>
-
             </MDBModal>
         </React.Fragment>
     )
