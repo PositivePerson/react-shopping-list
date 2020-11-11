@@ -28,10 +28,11 @@ export function incList(product) {
     localIitems.push(product);
 }
 
-const Products = ({ globalNumOfItemsCounter }) => {
+const Products = ({ globalNumOfItems, globalNumOfItemsCounter }) => {
     const productContext = useContext(ProductContext);
 
     const [firstRender, setFirstRenderVar] = useState(true);
+
     useEffect(() => {
         if (firstRender) {
             globalNumOfItemsCounter(productContext.items.length);
@@ -39,10 +40,10 @@ const Products = ({ globalNumOfItemsCounter }) => {
         }
 
         $(".MuiListItem-root").on("dblclick", (target) => {
+            globalNumOfItemsCounter(productContext.items.length - 1);
             productContext.removeProduct(target.currentTarget.id);
         })
-
-    }, [])
+    }, [firstRender, globalNumOfItemsCounter, productContext])
 
     return (
         <List component="nav" style={root} aria-label="products">

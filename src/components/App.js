@@ -24,7 +24,7 @@ function App() {
   function countItems() {
     const numberOfLis = $('ul li');
     const numberOfMenuLis = $('ul#choosedCategory li');
-    globalNumOfItemsCounter(numberOfLis.length - numberOfMenuLis.length);
+    // globalNumOfItemsCounter(numberOfLis.length - numberOfMenuLis.length);
   }
 
   //   let timeoutId = 0;
@@ -51,7 +51,7 @@ function App() {
           </div>
 
 
-          <Products globalNumOfItemsCounter={globalNumOfItemsCounter} />
+          <Products globalNumOfItems={globalNumOfItems} globalNumOfItemsCounter={globalNumOfItemsCounter} />
 
           <div className="summed">
             <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
