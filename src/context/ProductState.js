@@ -8,17 +8,24 @@ const ProductState = (props) => {
         items: [
             {
                 name: "Apples",
-                category: "fruits",
-                pieces: "",
-                weight: "30",
+                category: "Fruits",
+                pieces: 0,
+                weight: 30,
                 id: 1
             },
             {
                 name: "Cola",
                 category: "Drink",
-                pieces: "3",
-                weight: "",
+                pieces: 3,
+                weight: 0,
                 id: 2
+            },
+            {
+                name: "Lollypops",
+                category: "Candy",
+                pieces: 5,
+                weight: 0,
+                id: 3
             }
         ],
         currentItem: {}

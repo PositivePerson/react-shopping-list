@@ -28,7 +28,14 @@ export function incList(product) {
     localIitems.push(product);
 }
 
-const Products = ({ globalNumOfItems, globalNumOfItemsCounter }) => {
+const Products = ({
+    globalPiecesCounter,
+    globalWeightCounter,
+    globalPieces,
+    globalWeight,
+    globalNumOfItems,
+    globalNumOfItemsCounter
+}) => {
     const productContext = useContext(ProductContext);
 
     const [firstRender, setFirstRenderVar] = useState(true);
@@ -36,12 +43,29 @@ const Products = ({ globalNumOfItems, globalNumOfItemsCounter }) => {
     useEffect(() => {
         if (firstRender) {
             globalNumOfItemsCounter(productContext.items.length);
+
+            console.log(productContext.items);
+
+            let pieces = 0;
+            let weight = 0;
+            productContext.items.forEach((item) => {
+                globalPiecesCounter(pieces += (item.pieces ? parseInt(item.pieces) : 0));
+                globalWeightCounter(weight += (item.weight ? parseInt(item.weight) : 0));
+            })
+
+            globalPiecesCounter(pieces);
+            globalWeightCounter(weight);
+
             setFirstRenderVar(false);
         }
 
         $(".MuiListItem-root").on("dblclick", (target) => {
             globalNumOfItemsCounter(productContext.items.length - 1);
             productContext.removeProduct(target.currentTarget.id);
+
+            const targetInContext = productContext.items.filter(item => item.id === parseInt(target.currentTarget.id))[0];
+            globalPiecesCounter(globalPieces - targetInContext.pieces);
+            globalWeightCounter(globalWeight - targetInContext.weight);
         })
     }, [firstRender, globalNumOfItemsCounter, productContext])
 
@@ -51,7 +75,7 @@ const Products = ({ globalNumOfItems, globalNumOfItemsCounter }) => {
             {productContext.items.map((item) => (
                 <ListItem style={itemStyle} button key={item.id} id={item.id}>
                     <ListItemText primary={item.name} />
-                    <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " deg" : item.pieces + " pcs"} />
+                    <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " dag" : item.pieces + " pcs"} />
                 </ListItem>
 
             ))}

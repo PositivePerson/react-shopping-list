@@ -51,7 +51,14 @@ function App() {
           </div>
 
 
-          <Products globalNumOfItems={globalNumOfItems} globalNumOfItemsCounter={globalNumOfItemsCounter} />
+          <Products
+            globalWeightCounter={globalWeightCounter}
+            globalWeight={globalWeight}
+            globalPiecesCounter={globalPiecesCounter}
+            globalPieces={globalPieces}
+            globalNumOfItems={globalNumOfItems}
+            globalNumOfItemsCounter={globalNumOfItemsCounter}
+          />
 
           <div className="summed">
             <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
