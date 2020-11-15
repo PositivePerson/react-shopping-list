@@ -21,6 +21,8 @@ function App() {
   const [globalPieces, globalPiecesCounter] = useState(0);
   const [globalWeight, globalWeightCounter] = useState(0);
 
+  const [editing, setEditing] = useState(false);
+
   function countItems() {
     const numberOfLis = $('ul li');
     const numberOfMenuLis = $('ul#choosedCategory li');
@@ -58,6 +60,8 @@ function App() {
             globalPieces={globalPieces}
             globalNumOfItems={globalNumOfItems}
             globalNumOfItemsCounter={globalNumOfItemsCounter}
+            setModal={setModal}
+            setEditing={setEditing}
           />
 
           <div className="summed">
@@ -87,6 +91,8 @@ function App() {
             countItems={countItems}
             globalNumOfItems={globalNumOfItems}
             globalNumOfItemsCounter={globalNumOfItemsCounter}
+            editing={editing}
+            setEditing={setEditing}
           />
 
 

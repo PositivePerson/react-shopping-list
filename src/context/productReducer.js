@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, EDIT_PRODUCT, REMOVE_PRODUCT } from './types';
+import { ADD_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT, SET_CURRENT, CLEAR_CURRENT } from './types';
 
 export default (state, action) => {
     switch (action.type) {
@@ -17,6 +17,25 @@ export default (state, action) => {
                     // item => item.id !== action.payload
                 )
             }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+                items: state.items.map(item =>
+                    item.id === action.payload.id ? action.payload : item
+                ),
+                loading: false
+            };
+        case SET_CURRENT:
+            console.log("SET CURRENT GOT: ", action.payload);
+            return {
+                ...state,
+                currentItem: action.payload
+            };
+        case CLEAR_CURRENT:
+            return {
+                ...state,
+                currentItem: null
+            };
         default:
             return state;
     }

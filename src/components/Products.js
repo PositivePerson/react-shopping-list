@@ -28,19 +28,27 @@ export function incList(product) {
     localIitems.push(product);
 }
 
+let doneIds = [];
+doneIds[0] = "0";
+
 const Products = ({
     globalPiecesCounter,
     globalWeightCounter,
     globalPieces,
     globalWeight,
     globalNumOfItems,
-    globalNumOfItemsCounter
+    globalNumOfItemsCounter,
+    setModal,
+    setEditing
 }) => {
     const productContext = useContext(ProductContext);
 
     const [firstRender, setFirstRenderVar] = useState(true);
 
+    let times = 0;
+
     useEffect(() => {
+        console.log("useEffect: ", times++);
         if (firstRender) {
             globalNumOfItemsCounter(productContext.items.length);
 
@@ -51,14 +59,14 @@ const Products = ({
             productContext.items.forEach((item) => {
                 globalPiecesCounter(pieces += (item.pieces ? parseInt(item.pieces) : 0));
                 globalWeightCounter(weight += (item.weight ? parseInt(item.weight) : 0));
-            })
-
+            });
             globalPiecesCounter(pieces);
             globalWeightCounter(weight);
 
             setFirstRenderVar(false);
         }
 
+        let timeoutId;
         $(".MuiListItem-root").on("dblclick", (target) => {
             globalNumOfItemsCounter(productContext.items.length - 1);
             productContext.removeProduct(target.currentTarget.id);
@@ -66,7 +74,53 @@ const Products = ({
             const targetInContext = productContext.items.filter(item => item.id === parseInt(target.currentTarget.id))[0];
             globalPiecesCounter(globalPieces - targetInContext.pieces);
             globalWeightCounter(globalWeight - targetInContext.weight);
+        });
+        // $(".MuiListItem-root").on('mousedown', (target) => {
+        //     timeoutId = setTimeout(() => {
+        //         console.log("click and hold work")
+        //     }, 500);
+        // }).on('mouseup mouseleave', () => {
+        //     clearTimeout(timeoutId);
+        // });
+
+
+        [...document.querySelectorAll(".MuiListItem-root")].map((elem) => {
+            let done = false;
+            // elem.addEventListener("mousedown", () => {
+            //     timeoutId = setTimeout(() => {
+            //         done = true;
+            //         console.log("click and hold work")
+            //     }, 500);
+            // });
+            // if (done) elem.addEventListener('mouseup', () => { // -DOESNT WORK
+            //     console.log("mouse up");
+            //     clearTimeout(timeoutId);
+            // });
+
+            function onMouseDown(target) {
+                timeoutId = setTimeout(() => {
+                    done = true;
+                    console.log("click and hold work", target.id);
+                    productContext.setCurrent(productContext.items.find(item => item.id === parseInt(target.id)));
+                    setEditing(true);
+                    setModal(true);
+                }, 500);
+            }
+
+            function onMouseUp() { // -DOESNT WORK
+                console.log("mouse up");
+                clearTimeout(timeoutId);
+            }
+
+            if (!doneIds[elem.id]) {
+                elem.addEvent("mousedown", () => onMouseDown(elem));
+                if (done) elem.addEvent('mouseup', onMouseUp);
+                doneIds.push(elem.id);
+            }
+            console.log("array is: ", doneIds);
         })
+
+
     }, [firstRender, globalNumOfItemsCounter, productContext])
 
     return (

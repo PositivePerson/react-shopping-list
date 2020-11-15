@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import ProductContext from './productContext';
 import ProductReducer from './productReducer';
-import { ADD_PRODUCT, EDIT_PRODUCT, REMOVE_PRODUCT } from './types';
+import { ADD_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT, SET_CURRENT, CLEAR_CURRENT } from './types';
 
 const ProductState = (props) => {
     const initialState = {
@@ -40,9 +40,9 @@ const ProductState = (props) => {
         })
     }
 
-    const editProduct = (item) => {
+    const updateProduct = (item) => {
         dispatch({
-            type: EDIT_PRODUCT,
+            type: UPDATE_PRODUCT,
             payload: item
         })
     }
@@ -54,14 +54,29 @@ const ProductState = (props) => {
         })
     }
 
+    const setCurrent = product => {
+        dispatch({
+            type: SET_CURRENT,
+            payload: product
+        });
+    };
+
+    const clearCurrent = () => {
+        dispatch({
+            type: CLEAR_CURRENT
+        });
+    };
+
     return (
         <ProductContext.Provider
             value={{
                 items: state.items,
                 currentItem: state.currentItem,
                 addProduct,
-                editProduct,
-                removeProduct
+                updateProduct,
+                removeProduct,
+                setCurrent,
+                clearCurrent
             }}
         >
             {props.children}

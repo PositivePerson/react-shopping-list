@@ -25,7 +25,9 @@ const Modal = ({
     globalWeight,
     countItems,
     globalNumOfItems,
-    globalNumOfItemsCounter
+    globalNumOfItemsCounter,
+    editing,
+    setEditing
 }) => {
     const productContext = useContext(ProductContext);
 
@@ -41,6 +43,12 @@ const Modal = ({
     const [weightDisabled, setWeightDisabled] = useState(false);
 
     const productsList = ['vegetables', 'fruits', 'dairy', 'baked', 'drinks', 'hygiene', 'other'];
+
+    useEffect(() => {
+        if (editing) {
+            console.log(productContext.currentItem);
+        }
+    }, [editing]);
 
     const addItem = e => {
         setProductName(productNameRef.current.state.innerValue);
