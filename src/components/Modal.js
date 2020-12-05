@@ -91,12 +91,13 @@ const Modal = ({
                 <MDBModalBody className=" mb-1">
                     <div className="md-form form-sm w-50">
 
-                        <MDBInput label="Produkt"
+                        <MDBInput label="Product"
                             name="productName"
                             autoComplete="off"
                             type="text"
                             id="form2"
                             ref={productNameRef}
+                            valueDefault={productContext.currentItem.name}
                             required />
                     </div>
 
@@ -111,6 +112,7 @@ const Modal = ({
                             onChange={manageInputsEnable}
                             disabled={piecesDisabled}
                             onKeyPress={(event) => event.charCode >= 48} min="0"
+                            valueDefault={productContext.currentItem.pieces}
                             required />
 
                         <span className="mx-4 pt-2">lub</span>
@@ -123,6 +125,7 @@ const Modal = ({
                             onChange={manageInputsEnable}
                             disabled={weightDisabled}
                             onKeyPress={(event) => event.charCode >= 48} min="0"
+                            valueDefault={productContext.currentItem.weight}
                             required />
                     </div>
 

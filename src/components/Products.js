@@ -104,7 +104,7 @@ const Products = ({
                     productContext.setCurrent(productContext.items.find(item => item.id === parseInt(target.id)));
                     setEditing(true);
                     setModal(true);
-                }, 500);
+                }, 1000);
             }
 
             function onMouseUp() { // -DOESNT WORK
@@ -114,10 +114,23 @@ const Products = ({
 
             if (!doneIds[elem.id]) {
                 elem.addEvent("mousedown", () => onMouseDown(elem));
-                if (done) elem.addEvent('mouseup', onMouseUp);
+                // if (done) 
+                elem.addEvent('mouseup', onMouseUp);
                 doneIds.push(elem.id);
             }
             console.log("array is: ", doneIds);
+
+            //         product
+            // .on('mousedown', function () {
+            //   timeoutId = setTimeout(() => {
+            //     $('.modal').modal('show');
+            //     edit($(this));
+            //   }, 1000);
+            // })
+            // .on('mouseup mouseleave', () => {
+            //   clearTimeout(timeoutId);
+            // });
+
         })
 
 
