@@ -95,6 +95,27 @@ const Modal = ({
         setModal(!modal);
     }
 
+    const editItem = e => {
+        setProductName(productNameRef.current.state.innerValue);
+        productContext.updateProduct({
+            name: productNameRef.current.state.innerValue,
+            category: choosenOption,
+            pieces,
+            weight,
+            id: productContext.currentItem.id,
+        });
+        console.log("productContext.currentItem.pieces is ", (productContext.currentItem.pieces));
+        console.log("productContext.currentItem.weight is ", (productContext.currentItem.weight));
+        if (pieces) {
+            globalPiecesCounter(globalPieces - productContext.currentItem.pieces + parseInt(pieces));
+        } else {
+            globalWeightCounter(globalWeight - productContext.currentItem.weight + parseInt(weight));
+        }
+        // pieces ? globalPiecesCounter(globalPieces + parseInt(pieces)) : globalWeightCounter(globalWeight + parseInt(weight));
+        // globalNumOfItemsCounter(globalNumOfItems + 1);
+        setModal(!modal);
+    }
+
     const manageInputsEnable = (e) => {
         let value = e.target.value;
         if (value === "0") value = "";
@@ -176,27 +197,32 @@ const Modal = ({
                     </Select>
 
                     <div className="text-center mt-4">
-                        <button
-                            type="button"
-                            className="btn btn-info mt-1 mt-md-3"
-                            data-toggle="modal"
-                            data-target="#basicExampleModal"
-                            onClick={() => {
-                                addItem();
-                            }}
-                            id="dodaj">
-                            Approve
+                        {!editing ?
+                            <button
+                                type="button"
+                                className="btn btn-info mt-1 mt-md-3"
+                                data-toggle="modal"
+                                data-target="#basicExampleModal"
+                                onClick={() => {
+                                    addItem();
+                                }}
+                                id="dodaj">
+                                Approve
                         </button>
-
-                        <button
-                            type="button"
-                            className="btn btn-info mt-1 mt-md-3"
-                            data-toggle="modal"
-                            data-target="#basicExampleModal"
-                            onClick={() => setModal(!modal)}
-                            style={{ display: "none" }} id="aktualizuj">
-                            Approve Edition
+                            :
+                            <button
+                                type="button"
+                                className="btn btn-info mt-1 mt-md-3"
+                                data-toggle="modal"
+                                data-target="#basicExampleModal"
+                                onClick={() => {
+                                    editItem();
+                                }}
+                                // style={{ display: "none" }} 
+                                id="aktualizuj">
+                                Approve Edition
                         </button>
+                        }
                     </div>
                 </MDBModalBody>
             </MDBModal>

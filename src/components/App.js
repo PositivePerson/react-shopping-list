@@ -65,7 +65,7 @@ function App() {
           />
 
           <div className="summed">
-            <span>Products: <span id="produkty">{globalNumOfItems}</span></span>
+            <span className="float-left">Products: <span id="produkty">{globalNumOfItems}</span></span>
             <span className="float-right"><span id="waga">{globalWeight}</span> dag</span>
             <span className="float-right ml-2 mr-3">|</span>
             <span className="float-right"><span id="sztuki">{globalPieces}</span> pcs</span>
