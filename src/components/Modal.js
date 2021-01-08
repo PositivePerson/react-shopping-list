@@ -62,12 +62,14 @@ const Modal = ({
             if (unit === "pieces") {
                 setPieces(value);
                 setWeight('');
-                value.length ? setWeightDisabled(true) : setWeightDisabled(false);
+                setPiecesDisabled(false);
+                value ? setWeightDisabled(true) : setWeightDisabled(false);
             }
             else if (unit === "weight") {
                 setWeight(value);
                 setPieces('');
-                value.length ? setPiecesDisabled(true) : setPiecesDisabled(false);
+                setWeightDisabled(false);
+                value ? setPiecesDisabled(true) : setPiecesDisabled(false);
             }
             // setPieces(productContext.currentItem.pieces);
             // setWeight(productContext.currentItem.weight);    
