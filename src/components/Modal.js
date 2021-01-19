@@ -52,29 +52,31 @@ const Modal = ({
     }, [editing]);
 
     useEffect(() => {
-        if (productContext.currentItem.pieces || productContext.currentItem.weight) {
-            let value = productContext.currentItem.pieces > 0 ? productContext.currentItem.pieces : productContext.currentItem.weight;
-            let unit = productContext.currentItem.pieces ? "pieces" : "weight";
-            if (value === "0") value = "";
-            console.log("productContext.currentItem.pieces: ", productContext.currentItem.pieces);
-            console.log("productContext.currentItem.weight: ", productContext.currentItem.weight);
-            console.log("value: ", value);
-            if (unit === "pieces") {
-                setPieces(value);
-                setWeight('');
-                setPiecesDisabled(false);
-                value ? setWeightDisabled(true) : setWeightDisabled(false);
+        if (editing) {
+            if (productContext.currentItem.pieces || productContext.currentItem.weight) {
+                let value = productContext.currentItem.pieces > 0 ? productContext.currentItem.pieces : productContext.currentItem.weight;
+                let unit = productContext.currentItem.pieces ? "pieces" : "weight";
+                if (value === "0") value = "";
+                console.log("productContext.currentItem.pieces: ", productContext.currentItem.pieces);
+                console.log("productContext.currentItem.weight: ", productContext.currentItem.weight);
+                console.log("value: ", value);
+                if (unit === "pieces") {
+                    setPieces(value);
+                    setWeight('');
+                    setPiecesDisabled(false);
+                    value ? setWeightDisabled(true) : setWeightDisabled(false);
+                }
+                else if (unit === "weight") {
+                    setWeight(value);
+                    setPieces('');
+                    setWeightDisabled(false);
+                    value ? setPiecesDisabled(true) : setPiecesDisabled(false);
+                }
+                // setPieces(productContext.currentItem.pieces);
+                // setWeight(productContext.currentItem.weight);    
             }
-            else if (unit === "weight") {
-                setWeight(value);
-                setPieces('');
-                setWeightDisabled(false);
-                value ? setPiecesDisabled(true) : setPiecesDisabled(false);
-            }
-            // setPieces(productContext.currentItem.pieces);
-            // setWeight(productContext.currentItem.weight);    
         }
-    }, [productContext.currentItem.pieces, productContext.currentItem.weight])
+    }, [editing, productContext.currentItem.pieces, productContext.currentItem.weight])
 
     const addItem = e => {
         setProductName(productNameRef.current.state.innerValue);
