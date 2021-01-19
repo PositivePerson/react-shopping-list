@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MDBModal, MDBModalBody, MDBContainer, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import '../App.css';
 import $ from 'jquery';
@@ -25,8 +25,14 @@ function App() {
 
 	function addItem() {
 		if (editing) setEditing(!editing);
-		setModal(!modal);
 	}
+
+	useEffect(
+		() => {
+			setModal(!modal);
+		},
+		[ editing ]
+	);
 
 	//   let timeoutId = 0;
 	// function allowEdit(product) {
