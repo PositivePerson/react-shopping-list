@@ -15,14 +15,14 @@ const ProductState = (props) => {
             },
             {
                 name: "Cola",
-                category: "Drink",
+                category: "Drinks",
                 pieces: 3,
                 weight: 0,
                 id: 2
             },
             {
                 name: "Lollypops",
-                category: "Candy",
+                category: "Candies",
                 pieces: 5,
                 weight: 0,
                 id: 3

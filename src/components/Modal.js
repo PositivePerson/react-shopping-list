@@ -8,6 +8,8 @@ import { incList } from './Products';
 
 import $ from 'jquery';
 
+export const productsList = ['Vegetables', 'Fruits', 'Candies', 'Dairy', 'Baked', 'Drinks', 'Hygiene', 'Other'];
+
 const Modal = ({
 	modal,
 	setModal,
@@ -23,18 +25,18 @@ const Modal = ({
 }) => {
 	const productContext = useContext(ProductContext);
 
-	const [ choosenOption, setChoosenOption ] = useState('vegetables');
+	const [choosenOption, setChoosenOption] = useState('vegetables');
 
 	const productNameRef = useRef();
 
-	const [ productName, setProductName ] = useState('');
-	const [ pieces, setPieces ] = useState('');
-	const [ weight, setWeight ] = useState('');
+	const [productName, setProductName] = useState('');
+	const [pieces, setPieces] = useState('');
+	const [weight, setWeight] = useState('');
 
-	const [ piecesDisabled, setPiecesDisabled ] = useState(false);
-	const [ weightDisabled, setWeightDisabled ] = useState(false);
+	const [piecesDisabled, setPiecesDisabled] = useState(false);
+	const [weightDisabled, setWeightDisabled] = useState(false);
 
-	const productsList = [ 'vegetables', 'fruits', 'dairy', 'baked', 'drinks', 'hygiene', 'other' ];
+	// const productsList = ['Vegetables', 'Fruits', 'Dairy', 'Baked', 'Drinks', 'Hygiene', 'Other'];
 
 	useEffect(
 		() => {
@@ -43,7 +45,7 @@ const Modal = ({
 				console.log(productContext.currentItem.pieces);
 			}
 		},
-		[ editing ]
+		[editing]
 	);
 
 	useEffect(
@@ -80,7 +82,7 @@ const Modal = ({
 				setWeightDisabled(false);
 			}
 		},
-		[ editing, productContext.currentItem.pieces, productContext.currentItem.weight ]
+		[editing, productContext.currentItem.pieces, productContext.currentItem.weight]
 	);
 
 	const addItem = (e) => {
@@ -225,20 +227,20 @@ const Modal = ({
 								Approve
 							</button>
 						) : (
-							<button
-								type='button'
-								className='btn btn-info mt-1 mt-md-3'
-								data-toggle='modal'
-								data-target='#basicExampleModal'
-								onClick={() => {
-									editItem();
-								}}
-								// style={{ display: "none" }}
-								id='aktualizuj'
-							>
-								Approve Edition
-							</button>
-						)}
+								<button
+									type='button'
+									className='btn btn-info mt-1 mt-md-3'
+									data-toggle='modal'
+									data-target='#basicExampleModal'
+									onClick={() => {
+										editItem();
+									}}
+									// style={{ display: "none" }}
+									id='aktualizuj'
+								>
+									Approve Edition
+								</button>
+							)}
 					</div>
 				</MDBModalBody>
 			</MDBModal>

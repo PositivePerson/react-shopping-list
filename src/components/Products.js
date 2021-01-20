@@ -1,16 +1,18 @@
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
 import ProductContext from '../context/productContext'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import { productsList } from './Modal';
 
 import $ from "jquery";
 
 const localIitems = [
     {
         name: "Carrots",
-        category: "vegetables",
+        category: "Vegetables",
         pieces: "",
         weight: "12",
         id: 1
@@ -138,13 +140,20 @@ const Products = ({
 
     return (
         <List component="nav" style={root} aria-label="products">
-            {/* {localIitems.map((item) => ( */}
-            {productContext.items.map((item) => (
-                <ListItem style={itemStyle} button key={item.id} id={item.id}>
-                    <ListItemText primary={item.name} />
-                    <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " dag" : item.pieces + " pcs"} />
-                </ListItem>
+            { productsList.map((categ) => (
+                <div style={{ padding: '8px 0' }}>
+                    { productContext.items.filter(item => item.category === categ).length ?
+                        <h5 class="text-left">{categ}</h5>
+                        : ''}
+                    {/* {localIitems.map((item) => ( */}
+                    { productContext.items.filter(item => item.category === categ).map((item) => (
+                        <ListItem style={itemStyle} button key={item.id} id={item.id}>
+                            <ListItemText primary={item.name} />
+                            <ListItemText className="text-right" edge="end" secondary={item.weight ? item.weight + " dag" : item.pieces + " pcs"} />
+                        </ListItem>
 
+                    ))}
+                </div>
             ))}
         </List>
     );
